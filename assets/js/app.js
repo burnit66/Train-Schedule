@@ -27,11 +27,11 @@ var trainData = {
 
 
 $("#submit").on("click", function () {
-    trainData.trainName = $('#name').val()
+    trainData.trainName = $('#name').val().trim()
 
-    trainData.trainDest = $('#destination').val()
+    trainData.trainDest = $('#destination').val().trim()
 
-    var timeInput = $('#firstTrain').val()
+    var timeInput = $('#firstTrain').val().trim()
     var hours = Number(timeInput.substr(0, 2))
     var minutes = Number(timeInput.substr(3, 4))
     var result = dateFns.setHours(today, hours)
@@ -39,14 +39,14 @@ $("#submit").on("click", function () {
 
     //trainData.dateString = format(new Date(timeInput), 'HH:mm')
 
-    trainData.trainFreq = $('#freq').val()
+    trainData.trainFreq = $('#freq').val().trim()
 
     var freq = dateFns.addMinutes(finalResult, trainData.trainFreq)
 
     var freqHours = dateFns.getHours(freq)
     var freqMin = dateFns.getMinutes(freq)
 
-    if (freqMin === 0) {
+    if (freqMin === 0){
         freqMin = '00'
     } else if (freqMin.length = 1) {
         freqMin = '0' + freqMin
@@ -59,7 +59,6 @@ $("#submit").on("click", function () {
     var time = [today.getHours(), today.getMinutes()]
 
     var finalTime = time.join(":")
-
 
     trainData.nextTrain = dateFns.distanceInWords(finalTime, finalResult)
 
